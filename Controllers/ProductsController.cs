@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WarehouseAccounting.Data;
@@ -17,6 +18,7 @@ namespace WarehouseAccounting.Controllers
         }
 
         [HttpGet("get-all-products")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
         {
             var products = await _db.Products.ToListAsync();
@@ -26,6 +28,7 @@ namespace WarehouseAccounting.Controllers
         }
 
         [HttpGet("get-product/{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
             if (id <= 0)
@@ -39,6 +42,7 @@ namespace WarehouseAccounting.Controllers
         }
 
         [HttpPost("create-product")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Product>> CreateProduct([FromBody] Product product)
         {
             if (product == null)
@@ -54,6 +58,7 @@ namespace WarehouseAccounting.Controllers
         }
 
         [HttpPut("update-product/{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateProduct(int id, [FromBody] Product product)
         {
             if (id <= 0 || id != product.Id)
@@ -75,6 +80,7 @@ namespace WarehouseAccounting.Controllers
         }
 
         [HttpDelete("delete-product/{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             if (id <= 0)

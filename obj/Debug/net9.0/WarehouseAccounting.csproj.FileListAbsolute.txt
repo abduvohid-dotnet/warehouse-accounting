@@ -149,3 +149,12 @@ C:\Users\abduvohid\Desktop\my-first-projects\WarehouseAccounting\obj\Debug\net9.
 C:\Users\abduvohid\Desktop\my-first-projects\WarehouseAccounting\obj\Debug\net9.0\WarehouseAccounting.pdb
 C:\Users\abduvohid\Desktop\my-first-projects\WarehouseAccounting\obj\Debug\net9.0\WarehouseAccounting.genruntimeconfig.cache
 C:\Users\abduvohid\Desktop\my-first-projects\WarehouseAccounting\obj\Debug\net9.0\ref\WarehouseAccounting.dll
+C:\Users\abduvohid\Desktop\my-first-projects\WarehouseAccounting\obj\Debug\net9.0\WarehouseAccounting.sourcelink.json
+C:\Users\abduvohid\Desktop\my-first-projects\WarehouseAccounting\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\abduvohid\Desktop\my-first-projects\WarehouseAccounting\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\abduvohid\Desktop\my-first-projects\WarehouseAccounting\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\abduvohid\Desktop\my-first-projects\WarehouseAccounting\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\abduvohid\Desktop\my-first-projects\WarehouseAccounting\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\abduvohid\Desktop\my-first-projects\WarehouseAccounting\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\abduvohid\Desktop\my-first-projects\WarehouseAccounting\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\abduvohid\Desktop\my-first-projects\WarehouseAccounting\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll

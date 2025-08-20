@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WarehouseAccounting.Data;
@@ -17,6 +18,7 @@ namespace WarehouseAccounting.Controllers
         }
 
         [HttpGet("get-reports-balance")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<BalanceReportDto>>> GetBalance()
         {
             var balance = await _db.StockMovements
@@ -33,6 +35,7 @@ namespace WarehouseAccounting.Controllers
         }
 
         [HttpGet("get-reports-history")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<HistoryReportDto>>> GetHistory(
             DateTime? startDate, DateTime? endDate)
         {

@@ -13,6 +13,6 @@ namespace WarehouseAccounting.Models
         public string Password { get; set; }
 
         [Required, StringLength(20)]
-        public string Role { get; set; }
+        public string Role { get; set; } = "User";
     }
 }

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WarehouseAccounting.Data;
@@ -10,6 +11,7 @@ namespace WarehouseAccounting.Controllers
     public class UsersController : ControllerBase
     {
         private readonly AppDbContext _db;
+        private readonly string[] allowedRoles = ["Admin", "Manager", "User"];
 
         public UsersController(AppDbContext db)
         {
@@ -17,6 +19,7 @@ namespace WarehouseAccounting.Controllers
         }
 
         [HttpGet("get-all-users")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
         {
             var users = await _db.Users.ToListAsync();
@@ -24,6 +27,7 @@ namespace WarehouseAccounting.Controllers
         }
 
         [HttpGet("get-user/{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
             if (id <= 0)
@@ -37,10 +41,14 @@ namespace WarehouseAccounting.Controllers
         }
 
         [HttpPost("create-user")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<User>> CreateUser([FromBody] User user)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
+            if (!allowedRoles.Contains(user.Role))
+                return NotFound();
 
             _db.Users.Add(user);
             await _db.SaveChangesAsync();
@@ -49,6 +57,7 @@ namespace WarehouseAccounting.Controllers
         }
 
         [HttpPut("update-user/{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateUser(int id, [FromBody] User updatedUser)
         {
             if (id != updatedUser.Id)
@@ -72,6 +81,7 @@ namespace WarehouseAccounting.Controllers
         }
 
         [HttpDelete("delete-user/{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteUser(int id)
         {
             var user = await _db.Users.FindAsync(id);

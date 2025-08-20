@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WarehouseAccounting.Data;
@@ -18,6 +19,7 @@ namespace WarehouseAccounting.Controllers
 
         // 🔹 GET: Barcha harakatlarni olish
         [HttpGet("get-all-stock-movements")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<StockMovement>>> GetAllStockMovements()
         {
             var stockMovements = await _db.StockMovements
@@ -30,6 +32,7 @@ namespace WarehouseAccounting.Controllers
 
         // 🔹 GET: ID bo‘yicha olish
         [HttpGet("get-stock-movement/{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<StockMovement>> GetStockMovement(int id)
         {
             if (id <= 0)
@@ -47,12 +50,14 @@ namespace WarehouseAccounting.Controllers
         }
 
         [HttpPost("create-stock-movement-in")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> CreateStockMovementIn([FromBody] StockMovement stockMovement)
         {
             return await CreateStockMovement(stockMovement, "IN");
         }
 
         [HttpPost("create-stock-movement-out")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> CreateStockMovementOut([FromBody] StockMovement stockMovement)
         {
             return await CreateStockMovement(stockMovement, "OUT");

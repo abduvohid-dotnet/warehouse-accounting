@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WarehouseAccounting.Models;
 using WarehouseAccounting.Data;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WarehouseAccounting.Controllers
 {
@@ -18,6 +20,7 @@ namespace WarehouseAccounting.Controllers
         }
 
         [HttpGet("get-all-warehouses")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<Warehouse>>> GetAllWarehouses()
         {
             var warehouses = await _db.Warehouses.ToListAsync();
@@ -25,6 +28,7 @@ namespace WarehouseAccounting.Controllers
         }
 
         [HttpGet("get-warehouse/{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Warehouse>> GetWarehouse(int id)
         {
             var warehouse = await _db.Warehouses.FindAsync(id);
@@ -34,6 +38,7 @@ namespace WarehouseAccounting.Controllers
         }
 
         [HttpPost("create-warehouse")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Warehouse>> CreateWarehouse([FromBody] Warehouse warehouse)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -45,6 +50,7 @@ namespace WarehouseAccounting.Controllers
         }
 
         [HttpPut("update-warehouse/{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> UpdateWarehouse(int id, [FromBody] Warehouse warehouse)
         {
             if (id != warehouse.Id) return BadRequest();
@@ -56,6 +62,7 @@ namespace WarehouseAccounting.Controllers
         }
 
         [HttpDelete("delete-warehouse/{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteWarehouse(int id)
         {
             var warehouse = await _db.Warehouses.FindAsync(id);
